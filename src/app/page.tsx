@@ -1,65 +1,44 @@
-import Link from "next/link";
+import { Button } from '@/components/ui/button'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { cn } from '@/lib/utils'
+import React from 'react'
+import { X } from 'lucide-react'
 
-import { CreatePost } from "~/app/_components/create-post";
-import { api } from "~/trpc/server";
-
-export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
-
+const Home = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
-        </div>
+    // <div>Home</div>
+    <main>
+      <h1 className="mt-5 text-center text-4xl">
+        This is my First T3 stack CRUD application
+      </h1>
+      <Table className="mx-auto mt-10 max-w-[700px]">
+        <TableHeader>
+          <TableRow className=" bg-black hover:bg-gray-900">
+            <TableHead className="w-3/4 border-2 border-gray-400 text-white">
+              List Item
+            </TableHead>
+            <TableHead className="border-2 border-gray-400 text-center text-white">
+              <Button size={"sm"} className='bg-blue-700 hover:bg-blue-600 h-8'>Add Item</Button>
+            </TableHead>
+          </TableRow>
+        </TableHeader>
 
-        <CrudShowcase />
-      </div>
+        <TableBody>
+          <TableRow>
+            <TableCell className="tuncate border-2 border-gray-400 ">
+              <span className="">Lorem ipsum dolor sit a</span>
+            </TableCell>
+            <TableCell className={cn("border-2 border-gray-400")}>
+              <X
+                className="mx-auto cursor-pointer text-red-500"
+                strokeWidth={3}
+              />
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </main>
-  );
+  )
 }
 
-async function CrudShowcase() {
-  const latestPost = await api.post.getLatest();
-
-  return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
-
-      <CreatePost />
-    </div>
-  );
-}
+export default Home
