@@ -10,11 +10,12 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
+model ShoppingItem {
     id        Int      @id @default(autoincrement())
     name      String
+    isBought  Boolean? @default(false)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@index([name])
+    @@index([name]) // index is created on name field so that db can easily search by name
 }
