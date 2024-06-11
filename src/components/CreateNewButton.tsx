@@ -5,10 +5,8 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
 
 const CreateNewButton = () => {
-  const Router = useRouter();
   const [popupOpen, setPopupOpen] = useState(false);
   const [itemName, setItemName] = useState("");
 
@@ -16,7 +14,6 @@ const CreateNewButton = () => {
     onSuccess: () => {
       setPopupOpen(false);
       setItemName("");
-      Router.refresh();
     },
 
     onError: (error) => {
