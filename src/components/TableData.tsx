@@ -6,7 +6,24 @@ import { api } from "@/trpc/react";
 const TableData = () => {
   const ShoppingList = api.ShoppingItem.readAll.useQuery();
 
-  // console.log(ShoppingList.data);
+  if (ShoppingList.isLoading) {
+    return (
+      <TableBody>
+        <TableRow>
+          <TableCell className="tuncate border-2 border-gray-400 ">
+            <span className=" text-red-600">Loading...</span>
+          </TableCell>
+          <TableCell className={cn("border-2 border-gray-400")}>
+            <div className="invisible">test</div>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    );
+  }
+
+  if (ShoppingList.error) {
+    console.log(ShoppingList.error.message);
+  }
 
   return (
     <TableBody>
@@ -19,6 +36,7 @@ const TableData = () => {
             <TableCell className={cn("border-2 border-gray-400")}>
               <X
                 className="mx-auto cursor-pointer text-red-500"
+                size={20}
                 strokeWidth={3}
               />
             </TableCell>

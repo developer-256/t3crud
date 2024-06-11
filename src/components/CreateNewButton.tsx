@@ -1,13 +1,14 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { api } from "@/trpc/react";
-import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 const CreateNewButton = () => {
+  const Router = useRouter();
   const [popupOpen, setPopupOpen] = useState(false);
   const [itemName, setItemName] = useState("");
 
@@ -15,7 +16,9 @@ const CreateNewButton = () => {
     onSuccess: () => {
       setPopupOpen(false);
       setItemName("");
+      Router.refresh();
     },
+
     onError: (error) => {
       console.log("Error while submitting: ", error);
     },

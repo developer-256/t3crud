@@ -29,9 +29,3 @@ const Home = () => {
 };
 
 export default Home;
-
-export const Popup = () => {
-  return <div></div>;
-};
-
-// const greet = api
