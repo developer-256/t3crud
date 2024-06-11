@@ -6,7 +6,7 @@ import { api } from "@/trpc/react";
 const TableData = () => {
   const ShoppingList = api.ShoppingItem.readAll.useQuery();
 
-  console.log(ShoppingList.data);
+  // console.log(ShoppingList.data);
 
   return (
     <TableBody>
