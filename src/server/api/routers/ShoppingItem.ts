@@ -33,4 +33,24 @@ export const ShoppingItemRouter = createTRPCRouter({
         where: { id: input.itemToDeleteID },
       });
     }),
+
+  // marking item checked or not checked
+  updateCurrent: publicProcedure
+    .input(
+      z.object({
+        itemToUpdate: z.number(),
+        itemIsBought: z.boolean().nullable(),
+      }),
+    )
+
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.shoppingItem.update({
+        where: {
+          id: input.itemToUpdate,
+        },
+        data: {
+          isBought: !input.itemIsBought,
+        },
+      });
+    }),
 });

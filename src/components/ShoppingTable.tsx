@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import TableLoading from "./TableLoading";
 import DeleteButton from "./DeleteButton";
+import ItemName from "./ItemName";
 
 const ShoppingTable = () => {
   const [tableFields, setTableFields] = useState<ShoppingItem[]>([]);
@@ -32,7 +33,7 @@ const ShoppingTable = () => {
   }
 
   if (isError) {
-    console.log(error.message);
+    console.log("Error during reading: ", error.message);
   }
 
   return (
@@ -53,7 +54,12 @@ const ShoppingTable = () => {
           return (
             <TableRow key={Item.id}>
               <TableCell className="tuncate border-2 border-gray-400 ">
-                <span className="cursor-pointer">{Item.name}</span>
+                <ItemName
+                  name={Item.name}
+                  id={Item.id}
+                  currentField={Item}
+                  setTableFields={setTableFields}
+                />
               </TableCell>
               <TableCell className={cn("border-2 border-gray-400")}>
                 <DeleteButton id={Item.id} setTableFields={setTableFields} />
