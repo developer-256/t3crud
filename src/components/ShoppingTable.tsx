@@ -17,6 +17,7 @@ import TableLoading from "./TableLoading";
 
 const ShoppingTable = () => {
   const [tableFields, setTableFields] = useState<ShoppingItem[]>([]);
+
   const { isSuccess, isPending, data, isError, error } =
     api.ShoppingItem.readAll.useQuery();
 
