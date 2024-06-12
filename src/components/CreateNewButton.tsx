@@ -1,17 +1,23 @@
 "use client";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { api } from "@/trpc/react";
+import { ShoppingItem } from "@prisma/client";
 
-const CreateNewButton = () => {
+const CreateNewButton = ({
+  setTableFields,
+}: {
+  setTableFields: Dispatch<SetStateAction<ShoppingItem[]>>;
+}) => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [itemName, setItemName] = useState("");
 
   const createPost = api.ShoppingItem.createNew.useMutation({
-    onSuccess: () => {
+    onSuccess: (itemName) => {
+      setTableFields((prev) => [...prev, itemName]);
       setPopupOpen(false);
       setItemName("");
     },
