@@ -6,19 +6,26 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { api } from "@/trpc/react";
 import { ShoppingItem } from "@prisma/client";
+import { useToast } from "./ui/use-toast";
 
 const CreateNewButton = ({
   setTableFields,
 }: {
   setTableFields: Dispatch<SetStateAction<ShoppingItem[]>>;
 }) => {
+  const { toast } = useToast();
   const [popupOpen, setPopupOpen] = useState(false);
   const [itemName, setItemName] = useState("");
 
+  // create api
   const createPost = api.ShoppingItem.createNew.useMutation({
     onSuccess: (itemName) => {
       setTableFields((prev) => [...prev, itemName]);
       setPopupOpen(false);
+      toast({
+        variant: "success",
+        description: `${itemName.name} has been successfully added`,
+      });
       setItemName("");
     },
 

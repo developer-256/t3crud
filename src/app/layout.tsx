@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 
 import { TRPCReactProvider } from "@/trpc/react";
-import { Toast, ToastProvider } from "@/components/ui/toast";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "T3 CRUD",
@@ -20,11 +20,9 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TRPCReactProvider>
-          <ToastProvider>
-            {children}
+          {children}
 
-            <Toast />
-          </ToastProvider>
+          <Toaster />
         </TRPCReactProvider>
       </body>
     </html>

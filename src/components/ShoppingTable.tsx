@@ -10,14 +10,14 @@ import {
 } from "./ui/table";
 import CreateNewButton from "./CreateNewButton";
 import { ShoppingItem } from "@prisma/client";
-import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import TableLoading from "./TableLoading";
+import DeleteButton from "./DeleteButton";
 
 const ShoppingTable = () => {
   const [tableFields, setTableFields] = useState<ShoppingItem[]>([]);
-
+  // read api
   const { isSuccess, isPending, data, isError, error } =
     api.ShoppingItem.readAll.useQuery();
 
@@ -49,18 +49,14 @@ const ShoppingTable = () => {
       </TableHeader>
 
       <TableBody>
-        {tableFields?.map((Item, index) => {
+        {tableFields?.map((Item) => {
           return (
-            <TableRow key={index}>
+            <TableRow key={Item.id}>
               <TableCell className="tuncate border-2 border-gray-400 ">
-                <span className="">{Item.name}</span>
+                <span className="cursor-pointer">{Item.name}</span>
               </TableCell>
               <TableCell className={cn("border-2 border-gray-400")}>
-                <X
-                  className="mx-auto cursor-pointer text-red-500"
-                  size={20}
-                  strokeWidth={3}
-                />
+                <DeleteButton id={Item.id} setTableFields={setTableFields} />
               </TableCell>
             </TableRow>
           );

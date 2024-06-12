@@ -24,4 +24,13 @@ export const ShoppingItemRouter = createTRPCRouter({
   readAll: publicProcedure.query(({ ctx }) => {
     return ctx.db.shoppingItem.findMany();
   }),
+
+  deleteCurrent: publicProcedure
+    .input(z.object({ itemToDeleteID: z.number() }))
+
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.shoppingItem.delete({
+        where: { id: input.itemToDeleteID },
+      });
+    }),
 });

@@ -1,3 +1,4 @@
+"use client";
 import ShoppingTable from "@/components/ShoppingTable";
 
 const Home = () => {
@@ -7,7 +8,6 @@ const Home = () => {
         {/* This is my First T3 stack CRUD application <br /> */}
         {/* {data?.greeting} */}
       </h1>
-
       <ShoppingTable />
     </main>
   );
