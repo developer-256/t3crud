@@ -1,5 +1,6 @@
 "use client";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "./ui/label";

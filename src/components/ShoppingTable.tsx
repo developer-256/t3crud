@@ -26,7 +26,7 @@ const ShoppingTable = () => {
     if (isSuccess) {
       setTableFields(data || []);
     }
-  }, [data]);
+  }, [data, isSuccess]);
 
   if (isPending) {
     return <TableLoading />;

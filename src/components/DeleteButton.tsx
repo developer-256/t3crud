@@ -1,7 +1,7 @@
 import { api } from "@/trpc/react";
 import type { ShoppingItem } from "@prisma/client";
 import { X } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { useToast } from "./ui/use-toast";
 
 const DeleteButton = ({

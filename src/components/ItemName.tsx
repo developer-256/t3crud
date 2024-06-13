@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import type { ShoppingItem } from "@prisma/client";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 const ItemName = ({
   name,
