@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "./ui/table";
 import CreateNewButton from "./CreateNewButton";
-import { ShoppingItem } from "@prisma/client";
+import type { ShoppingItem } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import TableLoading from "./TableLoading";
